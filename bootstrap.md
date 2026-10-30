@@ -34,7 +34,7 @@ cd ~/generic-bootstrap
 ## Change default Shell
 
 ```bash
-sudo usermod --shell /usr/bin/zsh $USER
+sudo usermod --shell /usr/bin/zsh <your-username>
 ```
 
 - Reboot Again or Re-open console
