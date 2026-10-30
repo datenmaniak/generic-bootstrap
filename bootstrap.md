@@ -52,6 +52,7 @@ q
 - Copy the private key
 
 ```bash
+cd ~/generic-bootstrap
 cp private-keys  ~/generic-bootstrap/privkey.asc
 ```
 
