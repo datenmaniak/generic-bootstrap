@@ -11,20 +11,25 @@ flatpak install -y md.obsidian.Obsidian com.obsproject.Studio \
 org.videolan.VLC com.vivaldi.Vivaldi
 ```
 
+## Start CLI Bootstrapping
+
 ```bash
 git clone https://github.com/datenmaniak/generic-bootstrap.git
 ```
 
-## Install packages
+## Install packages according your releases: Atomic o rpm/dnf
 
 ```bash
-cd ~/generic_bootstrap
+cd ~/generic-bootstrap
 ./fedora-edition
+
+# For Atomic
+./fedora-atomic
 ```
 
-- Reboot the Workstation/Server (For Atomic Releases) or Reboot the terminal
+- Reboot the Atomic Workstation or
 
-- Open the terminal
+- Re-Open the terminal
 
 ## Change default Shell
 
@@ -32,17 +37,25 @@ cd ~/generic_bootstrap
 sudo usermod --shell /usr/bin/zsh $USER
 ```
 
-- Reboot Again / Restart console
+- Reboot Again or Re-open console
 
-## Setting up SSH Keys, Install Mise and dotfiles
+- Ignore zsh configuration
+
+```bash
+# Exit zsh configuration
+q
+
+```
+
+## Permission
 
 - Copy the private key
 
 ```bash
-cp private-keys  ~/generic_bootstrap/
+cp private-keys  ~/generic-bootstrap/privkey.asc
 ```
 
-## CLI Setting setup
+## CLI Setting setup: Install Mise and dotfiles
 
 ```bash
 ./setup
