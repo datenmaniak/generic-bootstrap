@@ -1,1 +1,1 @@
-sudo dnf install -y tmux zsh pinentry-curses git curl 
+sudo dnf install -y tmux zsh pinentry-curses git curl wget 

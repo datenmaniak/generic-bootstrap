@@ -47,7 +47,6 @@ fi
 echo "==> Inicializando y aplicando dotfiles..."
 chezmoi init --apply https://github.com/${GITHUB_USERNAME}/generic-dotfiles.git
 
-
 echo "==> Instalando herramientas declaradas por Mise..."
 mise install
 mise reshim
@@ -66,8 +65,10 @@ EOF
 fi
 
 if [[ -d "$HOME/.local/share/chezmoi/scripts" ]]; then
-  ln -sfn "$HOME/.local/share/chezmoi/scripts" "$HOME/scripts"
-  echo "==> Creado Enlace a los scripts "
+  ln -sf "$HOME/.local/share/chezmoi/scripts" "$HOME/.scripts"
+  echo "==> Creado enlace a los scrips personalizados!"
+else
+  echo "Ningun script!"
 fi
 
 echo "==> Migración completada."
