@@ -11,17 +11,9 @@ flatpak install -y md.obsidian.Obsidian com.obsproject.Studio \
 org.videolan.VLC com.vivaldi.Vivaldi
 ```
 
-````text
-
-## Bootstrapping the workstation
-
-
 ```bash
 git clone https://github.com/datenmaniak/generic-bootstrap.git
-sudo mount /dev/sdX /mnt
-````
-
-- Unplug USB Key
+```
 
 ## Install packages
 
@@ -49,6 +41,8 @@ sudo usermod --shell /usr/bin/zsh $USER
 ```bash
 cp private-keys  ~/generic_bootstrap/
 ```
+
+## CLI Setting setup
 
 ```bash
 ./setup
