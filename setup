@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-GITUSER="datenmaniak"
+GITHUB_USERNAME="datenmaniak"
 GPGKEY="$HOME/generic-bootstrap/privkey.asc"
 ZSHRC="$HOME/.zshrc"
 
@@ -45,7 +45,8 @@ else
 fi
 
 echo "==> Inicializando y aplicando dotfiles..."
-chezmoi init --apply "$GITUSER"
+chezmoi init --apply https://github.com/${GITHUB_USERNAME/generic-dotfiles.git
+
 
 echo "==> Instalando herramientas declaradas por Mise..."
 mise install
