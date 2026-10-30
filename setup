@@ -45,7 +45,7 @@ else
 fi
 
 echo "==> Inicializando y aplicando dotfiles..."
-chezmoi init --apply https://github.com/${GITHUB_USERNAME/generic-dotfiles.git
+chezmoi init --apply https://github.com/${GITHUB_USERNAME}/generic-dotfiles.git
 
 
 echo "==> Instalando herramientas declaradas por Mise..."
@@ -67,7 +67,6 @@ fi
 
 if [[ -d "$HOME/.local/share/chezmoi/scripts" ]]; then
   ln -sfn "$HOME/.local/share/chezmoi/scripts" "$HOME/scripts"
-  alias src="cd ~/scripts"
   echo "==> Creado Enlace a los scripts "
 fi
 
