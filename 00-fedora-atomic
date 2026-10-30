@@ -1,0 +1,18 @@
+rpm-ostree install alacritty \
+  tmux gcc zsh neovim 
+
+# already provied by Fedora:
+
+# pinentry-curses, curl  
+
+
+# permitir que el sistema interactuara con 
+# tarjetas inteligentes (Smartcards) y 
+# llaves de seguridad físicas mediante GnuPG (gpg).
+#
+# gnupg2-scdaemon
+#
+#está diseñado exclusivamente para comunicarse 
+#con tarjetas inteligentes de hardware (Smartcards) 
+#o tokens físicos (como una YubiKey, Nitrokey
+#o tarjetas criptográficas con chip)

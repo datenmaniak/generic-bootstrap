@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+GITUSER="datenmaniak"
+GPGKEY="$HOME/generic_bootstrap/privkey.asc"
+ZSHRC="$HOME/.zshrc"
+
+echo "==> Creando directorios de configuración..."
+mkdir -p "$HOME/.config" "$HOME/.local/bin"
+
+echo "==> Instalando Mise..."
+curl -fsSL https://mise.run | sh
+
+# Hacer disponible Mise en esta sesión del script
+export PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$PATH"
+
+echo "==> Verificando Mise..."
+mise --version
+
+# echo "==> Instalando Chezmoi mediante Mise..."
+mise use --global chezmoi@latest
+mise install
+#
+
+echo "==> Configurando activación de Mise en Zsh..."
+cat >>"$ZSHRC" <<'EOF'
+
+# Activa Mise en Zsh
+eval "$(mise activate zsh)"
+
+# MISE-SHELL-TOOLS
+# 
+EOF
+
+# echo "==> Importando clave GPG..."
+if [[ -f "$GPGKEY" ]]; then
+  gpg --import "$GPGKEY"
+else
+  echo "AVISO: No se encontró la clave privada GPG"
+  echo "- WARNING: Copia la llave privada en \`~/generic_bootstrap\` "
+  echo "  con el nombre \`privkey.asc\` y ejecuta nuevamente \`.setup\` "
+  echo " "
+  echo "Los dotfiles cifrados no podrán descifrarse hasta importarla."
+  exit 1
+fi
+
+echo "==> Inicializando y aplicando dotfiles..."
+chezmoi init --apply "$GITUSER"
+
+echo "==> Instalando herramientas declaradas por Mise..."
+mise install
+mise reshim
+
+echo "==> Configurando Starship y fzf en Zsh..."
+if ! grep -q "MISE-TOOLS" "$ZSHRC" 2>/dev/null; then
+  cat >>"$ZSHRC" <<'EOF'
+# --- Added by "workstation_bootstrap" by using Mise ---
+eval "$(mise activate zsh)"
+# -- Installed apps by Mise 
+eval "$(starship init zsh)"
+source <(fzf --zsh)
+# -- end bootstrap MISE-TOOLS --
+EOF
+
+fi
+
+if [[ -d "$HOME/.local/share/chezmoi/scripts" ]]; then
+  ln -sfn "$HOME/.local/share/chezmoi/scripts" "$HOME/scripts"
+  alias src="cd ~/scripts"
+  echo "==> Creado Enlace a los scripts "
+fi
+
+echo "==> Migración completada."
+rm "$GPGKEY"
+echo "Reinicia la consola!"

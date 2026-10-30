@@ -1,0 +1,2 @@
+sudo dnf install -y tmux gcc gnupg2 zsh \
+  pinentry-curses  neovim git curl 
