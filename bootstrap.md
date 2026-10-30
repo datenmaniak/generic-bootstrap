@@ -56,7 +56,7 @@ cd ~/generic-bootstrap
 cp private-keys  ~/generic-bootstrap/privkey.asc
 ```
 
-## CLI Setting setup: Install Mise and dotfiles
+## CLI setting up: Install Mise and dotfiles
 
 ```bash
 ./setup
