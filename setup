@@ -2,7 +2,7 @@
 set -euo pipefail
 
 GITUSER="datenmaniak"
-GPGKEY="$HOME/generic_bootstrap/privkey.asc"
+GPGKEY="$HOME/generic-bootstrap/privkey.asc"
 ZSHRC="$HOME/.zshrc"
 
 echo "==> Creando directorios de configuración..."
