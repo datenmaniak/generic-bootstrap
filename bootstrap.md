@@ -1,4 +1,4 @@
-# Fedora (Sway Atomic, Silverblue or Bazzite) Migration Steps
+# Fedora, AlmaLinux and RHEL Migration Steps
 
 ## Install GUI apps (essential)
 
@@ -11,35 +11,28 @@ flatpak install -y md.obsidian.Obsidian com.obsproject.Studio \
 org.videolan.VLC com.vivaldi.Vivaldi
 ```
 
-```plaintext
-Resolution 1920x1080
-25 PAL
-```
+````text
 
 ## Bootstrapping the workstation
 
-- Mount USB Key
 
 ```bash
+git clone https://github.com/datenmaniak/generic-bootstrap.git
 sudo mount /dev/sdX /mnt
-
-mkdir ~/workstation_bootstrap
-cp /mnt/* ~/workstation_bootstrap
-sudo umount /mnt/
-```
+````
 
 - Unplug USB Key
 
 ## Install packages
 
 ```bash
-cd ~/workstation_bootstrap
-./fedora
+cd ~/generic_bootstrap
+./fedora-edition
 ```
 
-- Reboot the Workstation
+- Reboot the Workstation/Server (For Atomic Releases) or Reboot the terminal
 
-- Open the terminal `Alacritty`
+- Open the terminal
 
 ## Change default Shell
 
@@ -47,9 +40,15 @@ cd ~/workstation_bootstrap
 sudo usermod --shell /usr/bin/zsh $USER
 ```
 
-- Reboot Again
+- Reboot Again / Restart console
 
 ## Setting up SSH Keys, Install Mise and dotfiles
+
+- Copy the private key
+
+```bash
+cp private-keys  ~/generic_bootstrap/
+```
 
 ```bash
 ./setup
