@@ -1,6 +1,6 @@
 # CLI Setting up
 
-Solo para uso en estaciones de trabajo Fedora y/o servidores basado en RHEL y AlmaLinux.
+Aplicable en estaciones de trabajo Fedora y/o servidores basado en RHEL y AlmaLinux.
 
 ```bash
 git clone https://github.com/datenmaniak/generic-bootstrap.git
@@ -19,7 +19,3 @@ git clone https://github.com/datenmaniak/generic-bootstrap.git
 # Bootstrap by using Mise
 ./setup
 ```
-
-Fedora-bootstrap.md
-
----
