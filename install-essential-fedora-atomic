@@ -1,5 +1,5 @@
 rpm-ostree install alacritty \
-  tmux gcc zsh neovim 
+  tmux gcc zsh 
 
 # already provied by Fedora:
 
