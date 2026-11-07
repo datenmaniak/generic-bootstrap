@@ -5,9 +5,19 @@ GITHUB_USERNAME="datenmaniak"
 GPGKEY="$HOME/generic-bootstrap/privatekey"
 ZSHRC="$HOME/.zshrc"
 
-# echo "==> Importando clave GPG..."
+# --- importar la llave primero
 if [[ -f "$GPGKEY" ]]; then
-  gpg --import "$GPGKEY"
+  if ! gpg --import "$GPGKEY"; then
+    echo -e "ERROR: Falló la importación de la clave privada GPG."
+    echo -e "Se eliminará $HOME/.gnupg/common.conf para evitar el uso de keyboxd.\n"
+    rm -f "$HOME/.gnupg/common.conf"
+    # Reintento opcional sin keyboxd
+    if ! gpg --import "$GPGKEY"; then
+      echo -e "ERROR: La importación sigue fallando tras eliminar common.conf."
+      echo -e "Revisa los permisos de $HOME/.gnupg o el estado de keyboxd.\n"
+      exit 1
+    fi
+  fi
 else
   echo -e "AVISO: No se encontró la clave privada GPG..!"
   echo -e "Los dotfiles cifrados no podrán descifrarse hasta importarla\n"
@@ -18,6 +28,20 @@ else
   echo "Los dotfiles cifrados no podrán descifrarse hasta importarla."
   exit 1
 fi
+
+# # echo "==> Importando clave GPG..."
+# if [[ -f "$GPGKEY" ]]; then
+#   gpg --import "$GPGKEY"
+# else
+#   echo -e "AVISO: No se encontró la clave privada GPG..!"
+#   echo -e "Los dotfiles cifrados no podrán descifrarse hasta importarla\n"
+#   echo -e "Haz una copia de la llave privada dentro del directorio\n"
+#   echo "    - cp <my-pprivate-key.asc>  ~/generic-bootstrap/privatekey  "
+#   echo -e "    - ejecuta nuevamente \`.setup\` \n"
+#   echo -e "\n --- privatekey --- será eliminada al finalizar este proceso --- "
+#   echo "Los dotfiles cifrados no podrán descifrarse hasta importarla."
+#   exit 1
+# fi
 
 echo "==> Creando directorios de configuración..."
 mkdir -p "$HOME/.config" "$HOME/.local/bin"
