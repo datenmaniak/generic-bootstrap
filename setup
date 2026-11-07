@@ -5,6 +5,20 @@ GITHUB_USERNAME="datenmaniak"
 GPGKEY="$HOME/generic-bootstrap/privatekey"
 ZSHRC="$HOME/.zshrc"
 
+# echo "==> Importando clave GPG..."
+if [[ -f "$GPGKEY" ]]; then
+  gpg --import "$GPGKEY"
+else
+  echo -e "AVISO: No se encontró la clave privada GPG..!"
+  echo -e "Los dotfiles cifrados no podrán descifrarse hasta importarla\n"
+  echo -e "Haz una copia de la llave privada dentro del directorio\n"
+  echo "    - cp <my-pprivate-key.asc>  ~/generic-bootstrap/privatekey  "
+  echo -e "    - ejecuta nuevamente \`.setup\` \n"
+  echo -e "\n --- privatekey --- será eliminada al finalizar este proceso --- "
+  echo "Los dotfiles cifrados no podrán descifrarse hasta importarla."
+  exit 1
+fi
+
 echo "==> Creando directorios de configuración..."
 mkdir -p "$HOME/.config" "$HOME/.local/bin"
 
@@ -29,19 +43,6 @@ cat >>"$ZSHRC" <<'EOF'
 eval "$(mise activate zsh)"
 # -- MISE-TOOLS ---
 EOF
-
-# echo "==> Importando clave GPG..."
-if [[ -f "$GPGKEY" ]]; then
-  gpg --import "$GPGKEY"
-else
-  echo "AVISO: No se encontró la clave privada GPG"
-  echo "--- WARNING: Coloca temporalmente la llave privada ---"
-  echo "            cp  <private-key.asc>    ~/generic-bootstrap/privatekey"
-  echo " y ejecuta nuevamente \`.setup\` "
-  echo " ------- SERA ELIMINADA AL CONCLUIR EL BOOTSTRAP -------- "
-  echo "Los dotfiles cifrados no podrán descifrarse hasta importarla."
-  exit 1
-fi
 
 echo "==> Inicializando y aplicando dotfiles..."
 chezmoi init --apply https://github.com/${GITHUB_USERNAME}/generic-dotfiles.git
