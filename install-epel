@@ -1,0 +1,4 @@
+
+# EPEL for Alacritty  
+sudo  dnf install -y epel-release
+sudo dnf update -y
